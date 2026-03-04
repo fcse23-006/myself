@@ -626,6 +626,8 @@ section {
         transition: 0.3s;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         padding: 20px 0;
+         height: calc(100vh - 100px); 
+        overflow-y: auto;
     }
     
     .nav-menu.active {
