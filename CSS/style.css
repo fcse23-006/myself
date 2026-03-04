@@ -42,7 +42,7 @@ section {
     padding: 60px 0;
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== NAVIGATION - UPDATED ===== */
 .navbar {
     background: white;
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
@@ -56,14 +56,17 @@ section {
 
 .navbar .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 100px;
+    position: relative;
 }
 
 .logo {
     display: flex;
     align-items: center;
+    position: absolute;
+    right: 20px;
 }
 
 .nav-avatar {
@@ -682,31 +685,13 @@ section {
         font-size: 1.8rem;
     }
     
-    /* Navigation only changes */
     .navbar .container {
-        flex-direction: row;
-        justify-content: space-between;
         height: 80px;
         padding: 0 15px;
     }
     
-    .logo {
-        order: 2;
-        margin-bottom: 0;
-    }
-    
     .nav-menu {
-        position: static;
-        left: auto;
-        transform: none;
-        flex-wrap: wrap;
-        justify-content: flex-end;
         gap: 1rem;
-        margin: 0;
-    }
-    
-    .nav-menu li {
-        margin: 0;
     }
     
     .nav-menu a {
@@ -714,11 +699,6 @@ section {
         padding: 5px 8px;
     }
     
-    .hamburger {
-        display: none;
-    }
-    
-    /* Everything else stays the same */
     .hero h1 {
         font-size: 2.2rem;
     }
@@ -762,17 +742,15 @@ section {
 
 /* ===== HAMBURGER MENU FOR VERY SMALL SCREENS ===== */
 @media screen and (max-width: 600px) {
-    /* Navigation only changes */
     .navbar .container {
-        flex-direction: row;
         justify-content: space-between;
         height: 70px;
         padding: 0 15px;
     }
     
     .logo {
-        order: 2;
-        margin-bottom: 0;
+        position: static;
+        right: auto;
     }
     
     .nav-avatar {
@@ -783,7 +761,6 @@ section {
     
     .hamburger {
         display: block;
-        order: 1;
     }
     
     .nav-menu {
@@ -795,7 +772,6 @@ section {
         flex-direction: column;
         background: white;
         padding: 15px 0;
-        margin: 0;
         gap: 0.5rem;
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         z-index: 999;
@@ -834,7 +810,6 @@ section {
         padding: 0 15px;
     }
     
-    /* Navigation only changes */
     .navbar .container {
         height: 60px;
         padding: 0 12px;
@@ -861,7 +836,6 @@ section {
         padding: 6px 12px;
     }
     
-    /* Everything else stays the same */
     .hero h1 {
         font-size: 1.8rem;
     }
@@ -917,4 +891,3 @@ img {
     max-width: 100%;
     height: auto;
 }
-
