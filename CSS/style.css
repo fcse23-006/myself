@@ -670,90 +670,89 @@ section {
     .about-content,
     .contact-content {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 40px;
     }
 }
 
 @media screen and (max-width: 768px) {
     h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+        font-size: 1.8rem;
     }
     
+    /* Navigation only changes */
     .navbar .container {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 15px;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 80px;
+        padding: 0 15px;
     }
     
     .logo {
-        margin-bottom: 10px;
+        order: 2;
+        margin-bottom: 0;
     }
     
     .nav-menu {
+        position: static;
+        left: auto;
+        transform: none;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.8rem;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin: 0;
     }
     
     .nav-menu li {
-        margin: 3px 0;
+        margin: 0;
     }
     
     .nav-menu a {
-        font-size: 0.85rem;
-        padding: 4px 8px;
+        font-size: 0.9rem;
+        padding: 5px 8px;
     }
     
-    .hero {
-        min-height: 50vh;
+    .hamburger {
+        display: none;
     }
     
+    /* Everything else stays the same */
     .hero h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
+        font-size: 2.2rem;
     }
     
     .hero h2 {
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
     }
     
     .hero p {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
     }
     
     .hero-buttons {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
     }
     
     .btn {
-        width: 180px;
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
+        width: 200px;
     }
     
     .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 30px;
+        font-size: 2rem;
     }
     
     .about-stats {
         grid-template-columns: 1fr;
-        gap: 12px;
-        margin-top: 15px;
+        gap: 15px;
     }
     
     .skills-grid,
     .projects-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
     }
     
     .contact-form {
@@ -763,39 +762,43 @@ section {
 
 /* ===== HAMBURGER MENU FOR VERY SMALL SCREENS ===== */
 @media screen and (max-width: 600px) {
+    /* Navigation only changes */
     .navbar .container {
         flex-direction: row;
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px 15px;
+        justify-content: space-between;
+        height: 70px;
+        padding: 0 15px;
     }
     
     .logo {
+        order: 2;
         margin-bottom: 0;
     }
     
     .nav-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
     }
     
     .hamburger {
         display: block;
-    }
-    
-    .bar {
-        width: 22px;
-        height: 2px;
-        margin: 4px auto;
+        order: 1;
     }
     
     .nav-menu {
         display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
         width: 100%;
         flex-direction: column;
-        margin-top: 10px;
-        gap: 0.3rem;
+        background: white;
+        padding: 15px 0;
+        margin: 0;
+        gap: 0.5rem;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 999;
     }
     
     .nav-menu.active {
@@ -804,11 +807,12 @@ section {
     
     .nav-menu li {
         margin: 5px 0;
+        text-align: center;
     }
     
     .nav-menu a {
-        font-size: 0.9rem;
-        padding: 6px 12px;
+        font-size: 1rem;
+        padding: 8px 15px;
         display: block;
     }
     
@@ -827,104 +831,87 @@ section {
 
 @media screen and (max-width: 480px) {
     .container {
+        padding: 0 15px;
+    }
+    
+    /* Navigation only changes */
+    .navbar .container {
+        height: 60px;
         padding: 0 12px;
     }
     
-    .navbar .container {
-        padding: 8px 12px;
-    }
-    
     .nav-avatar {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
     }
     
-    .hero {
-        min-height: 40vh;
-        padding: 20px 0;
+    .bar {
+        width: 22px;
+        height: 2px;
+        margin: 4px auto;
     }
     
+    .nav-menu {
+        top: 60px;
+    }
+    
+    .nav-menu a {
+        font-size: 0.95rem;
+        padding: 6px 12px;
+    }
+    
+    /* Everything else stays the same */
     .hero h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
     
     .hero h2 {
-        font-size: 1rem;
-    }
-    
-    .hero p {
-        font-size: 0.85rem;
+        font-size: 1.2rem;
     }
     
     .btn {
-        width: 160px;
-        max-width: 200px;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
+        width: 100%;
+        max-width: 250px;
     }
     
     .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 25px;
+        font-size: 1.8rem;
     }
     
     .project-card {
-        padding: 15px;
+        padding: 20px;
     }
     
     .project-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
+        font-size: 1.2rem;
     }
     
     .project-card p {
-        font-size: 0.85rem;
-        margin-bottom: 15px;
-    }
-    
-    .project-tags {
-        gap: 6px;
+        font-size: 0.9rem;
     }
     
     .project-tags span {
-        padding: 3px 8px;
-        font-size: 0.75rem;
+        padding: 4px 10px;
+        font-size: 0.8rem;
     }
     
     .contact-item {
         flex-direction: column;
         text-align: center;
-        gap: 3px;
-        padding: 12px;
+        gap: 5px;
     }
     
     .contact-item i {
-        margin-bottom: 3px;
-        font-size: 1rem;
+        margin-bottom: 5px;
     }
     
     .contact-item span {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         word-break: break-word;
     }
-    
-    .social-links {
-        gap: 10px;
-        margin-top: 20px;
-    }
-    
-    .social-links a {
-        width: 35px;
-        height: 35px;
-        font-size: 1.2rem;
-    }
 }
+
 /* Make all images responsive */
 img {
     max-width: 100%;
