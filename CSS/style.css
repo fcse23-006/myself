@@ -894,3 +894,18 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+
+.g-recaptcha {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive reCAPTCHA */
+@media screen and (max-width: 480px) {
+    .g-recaptcha {
+        transform: scale(0.85);
+        transform-origin: center;
+    }
+}
