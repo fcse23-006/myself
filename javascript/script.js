@@ -29,153 +29,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission handling with reCAPTCHA
+// Form submission handling
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         // Get form data
-        const name = document.querySelector('input[placeholder="Your Name"]').value.trim();
-        const email = document.querySelector('input[placeholder="Your email"]').value.trim();
-        const subject = document.querySelector('input[placeholder="Subject"]').value.trim();
-        const message = document.querySelector('textarea').value.trim();
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
         
-        // Validate inputs
-        if (!validateInputs(name, email, message)) {
-            return;
-        }
+        // Here you would typically send the data to a server
+        console.log('Form submitted:', data);
         
-        // Check reCAPTCHA
-        const recaptchaResponse = grecaptcha.getResponse();
-        if (!recaptchaResponse) {
-            showNotification('Please complete the CAPTCHA verification', 'error');
-            return;
-        }
-        
-        // Disable button to prevent double submission
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-        
-        // Sanitize inputs
-        const sanitizedData = {
-            name: sanitizeInput(name),
-            email: sanitizeInput(email),
-            subject: sanitizeInput(subject),
-            message: sanitizeInput(message),
-            recaptcha: recaptchaResponse
-        };
-        
-        try {
-            // Here you would send to your backend
-            console.log('Form submitted:', sanitizedData);
-            
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            showNotification('Thank you! I will get back to you soon.', 'success');
-            contactForm.reset();
-            grecaptcha.reset(); // Reset reCAPTCHA after submission
-        } catch (error) {
-            console.error('Form submission error:', error);
-            showNotification('Something went wrong. Please try again.', 'error');
-        } finally {
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
-        }
+        // Show success message (you can customize this)
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
     });
 }
 
-// Validation function
-function validateInputs(name, email, message) {
-    if (!name || name.length < 2) {
-        showNotification('Please enter a valid name', 'error');
-        return false;
-    }
-    
-    if (!email || !isValidEmail(email)) {
-        showNotification('Please enter a valid email', 'error');
-        return false;
-    }
-    
-    if (!message || message.length < 10) {
-        showNotification('Message must be at least 10 characters', 'error');
-        return false;
-    }
-    
-    return true;
-}
-
-// Email validation
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Sanitize input (remove HTML tags)
-function sanitizeInput(input) {
-    const div = document.createElement('div');
-    div.textContent = input;
-    return div.innerHTML;
-}
-
-// Notification function
-function showNotification(message, type = 'success') {
-    // Check if notification container exists
-    let container = document.querySelector('.notification-container');
-    if (!container) {
-        container = document.createElement('div');
-        container.className = 'notification-container';
-        container.style.cssText = `
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            z-index: 9999;
-        `;
-        document.body.appendChild(container);
-    }
-    
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.style.cssText = `
-        background: ${type === 'success' ? '#10b981' : '#ef4444'};
-        color: white;
-        padding: 15px 25px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        animation: slideIn 0.3s ease;
-        cursor: pointer;
-    `;
-    notification.textContent = message;
-    
-    container.appendChild(notification);
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    }, 5000);
-    
-    // Click to dismiss
-    notification.addEventListener('click', () => notification.remove());
-}
-
-// Add animation keyframes
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
 // Animate skill bars on scroll
 const skillSection = document.querySelector('#skills');
 const progressBars = document.querySelectorAll('.progress');
