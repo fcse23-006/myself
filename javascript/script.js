@@ -39,7 +39,7 @@ if (contactForm) {
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
         
-        // Here you would typically send the data to a server
+        //  send the data to a server
         console.log('Form submitted:', data);
         
         // Show success message (you can customize this)
@@ -48,34 +48,64 @@ if (contactForm) {
     });
 }
 
-// Animate skill bars on scroll
+// Animate skill bars on scroll 
 const skillSection = document.querySelector('#skills');
 const progressBars = document.querySelectorAll('.progress');
+let animationDone = false; // ensures animation runs only once
 
 function showProgress() {
+    if (animationDone) return; // Don't animate again if already done
+    
     progressBars.forEach(progressBar => {
-        const value = progressBar.style.width;
+        // Store the original width from the style attribute
+        const originalWidth = progressBar.style.width;
+        
+        // Start from 0
         progressBar.style.width = '0';
+        progressBar.style.transition = 'width 1s ease';
+        
+        // Force a reflow
+        progressBar.offsetHeight;
+        
+        // Animate to original width
         setTimeout(() => {
-            progressBar.style.width = value;
+            progressBar.style.width = originalWidth;
         }, 100);
     });
+    
+    animationDone = true; // Mark animation as done
 }
 
-function hideProgress() {
-    progressBars.forEach(p => p.style.width = 0);
-}
 
+// Use a more efficient scroll listener with throttling
+let scrolling = false;
 window.addEventListener('scroll', () => {
+    if (!scrolling) {
+        window.requestAnimationFrame(() => {
+            const sectionPos = skillSection.getBoundingClientRect().top;
+            const screenPos = window.innerHeight * 0.8; // Trigger when section is 80% in view
+            
+            if (sectionPos < screenPos && !animationDone) {
+                showProgress();
+            }
+            
+            scrolling = false;
+        });
+        
+        scrolling = true;
+    }
+});
+
+// Also trigger on page load in case skills are already visible
+window.addEventListener('load', () => {
     const sectionPos = skillSection.getBoundingClientRect().top;
-    const screenPos = window.innerHeight / 2;
+    const screenPos = window.innerHeight * 0.8;
     
     if (sectionPos < screenPos) {
         showProgress();
-    } else {
-        hideProgress();
     }
 });
+
 
 // Active navigation link highlighting
 const sections = document.querySelectorAll('section');

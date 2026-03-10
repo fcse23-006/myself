@@ -243,7 +243,7 @@ section {
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: none;
+    background:  #3b5b9b;;
     border-radius: 2px;
 }
 
@@ -405,8 +405,8 @@ section {
 }
 
 .progress {
-    height: 100%;
-    background: #3b5b9b;
+   height: 100% !important;
+    background: #3b5b9b !important;
     border-radius: 10px;
     transition: width 1s ease;
 }
